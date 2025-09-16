@@ -14,7 +14,7 @@ services:
     command: npm run dev -- --host
     environment:
       DATABASE_URL: "postgresql://postgres:password@postgres_db_dev:5432/express_db?schema=public"
-      CHOKIDAR_USEPOLLING: "true"   # <-- Tambahkan ini
+      CHOKIDAR_USEPOLLING: "true"   
     depends_on:
       - postgres_db_dev
 
