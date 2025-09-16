@@ -1,5 +1,6 @@
 import { request, response } from "express";
 import { create, getAllUsers } from "../repositories/app.repository";
+import type{ CreateUserInput } from "../models/app.models";
 
 export const getApp = (req = request, res = response) => {
   res.status(200).json({
@@ -7,11 +8,11 @@ export const getApp = (req = request, res = response) => {
   });
 };
 
-export async function createUser(name: string, email: string, address: string) {
-  if (!name || !email || !address) {
+export async function createUser(input:CreateUserInput) {
+  if (!input) {
     throw new Error("Name, email, and address are required");
   }
-  await create(name, email, address);
+  await create(input);
 }
 export async function getAllUser() {
   const data = await getAllUsers();

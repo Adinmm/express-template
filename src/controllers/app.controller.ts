@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { createUser, getAllUser } from "../services/app.service";
-
+import type{ CreateUserInput } from "../models/app.models";
 export async function addUser(req: Request, res: Response) {
-  const { name, email, address } = req.body;
+  const input: CreateUserInput = req.body;
   try {
-    if (!name || !email || !address) {
+    if (!input) {
       return res.status(400).json({
         status_code: res.statusCode,
         message: {
@@ -14,7 +14,7 @@ export async function addUser(req: Request, res: Response) {
       });
     }
 
-    await createUser(name, email, address);
+    await createUser(input);
 
     res.status(200).json({
       status_code: res.statusCode,

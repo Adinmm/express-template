@@ -1,11 +1,10 @@
 import { prisma } from "../config/prisma";
+import type{CreateUserInput} from '../models/app.models'
 
-export async function create(name: string, email: string, address: string) {
+export async function create(input:CreateUserInput) {
   return await prisma.user.create({
     data: {
-      name,
-      email,
-      address,
+      ...input,
     },
   });
 }
