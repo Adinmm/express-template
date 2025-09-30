@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: express_app_prod
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:password@postgres_db_prod:5432/express_db"
+    depends_on:
+      - postgres_db_prod
+    restart: always
+
+  postgres_db_prod:
+    image: postgres:15-alpine
+    container_name: postgres_db_prod
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: express_db
+    volumes:
+      - pgdata_prod:/var/lib/postgresql/data
+
+volumes:
+  pgdata_prod:

@@ -3,6 +3,7 @@ import { createUser, getAllUser } from "../services/app.service";
 import type{ CreateUserInput } from "../models/app.models";
 export async function addUser(req: Request, res: Response) {
   const input: CreateUserInput = req.body;
+ 
   try {
     if (!input) {
       return res.status(400).json({
